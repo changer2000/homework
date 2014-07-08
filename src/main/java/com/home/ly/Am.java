@@ -29,8 +29,11 @@ public class Am {
 		if (args!=null && args.length>0)
 			type = args[0];
 		
-		Am am = new Am(type);
-		am.doHomework();
+		for (int i=0; i<50; i++) {
+			Am am = new Am(type);
+			am.doHomework();
+			System.out.println("");
+		}
 		
 	}
 	

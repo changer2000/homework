@@ -13,21 +13,26 @@ public class AddLessEqualTo100Generator implements IGenerator {
 	
 	@Override
 	public IHomework generateHomework() {
-		int adder1 = generateAdder(MAX_SUM);
-		int adder2 = generateAdder(MAX_SUM-adder1);
-		
-		IHomework homework = new HomeworkImpl();
-		homework.setAHomework(adder1 + " + " + adder2);
-		homework.setResult(Integer.toString(adder1+adder2));
-		
+		IHomework homework = null;
+		while (true) {
+			int adder1 = generateAdder(MAX_SUM);
+			if (adder1<10 || adder1>90) {
+				random = new Random();
+				continue;
+			}
+			int adder2 = generateAdder(MAX_SUM-adder1);
+			
+			homework = new HomeworkImpl();
+			homework.setAHomework(adder1 + " + " + adder2);
+			homework.setResult(Integer.toString(adder1+adder2));
+			break;
+		}
 		return homework;
 	}
 	
 	private int generateAdder(int seed) {
 		int adder = random.nextInt(seed);
-		while (adder<=10 || adder>=90) {
-			adder = random.nextInt(seed);
-		}
+		adder = random.nextInt(seed);
 		return adder;
 	}
 
