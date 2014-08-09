@@ -2,6 +2,8 @@ package com.home.ly.homework.generator.impl;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.home.ly.homework.HomeworkImpl;
 import com.home.ly.homework.IHomework;
 import com.home.ly.homework.generator.IGenerator;
@@ -15,8 +17,17 @@ public class MinusLess100GeneratorImpl implements IGenerator {
 	
 	@Override
 	public IHomework generateHomework() {
-		int minuend = generateMinuend();
-		int subtractor = generateSubtractor(minuend);
+		int minuend = 0;
+		int subtractor=0;
+		while (true) {
+			minuend = generateMinuend();
+			int m1 = Integer.valueOf(StringUtils.right(minuend+"", 1)).intValue();
+			
+			subtractor = generateSubtractor(minuend);
+			int s1 = Integer.valueOf(StringUtils.right(subtractor+"", 1)).intValue();
+			if (m1<s1)
+				break;
+		}
 		
 		IHomework homework = new HomeworkImpl();
 		homework.setAHomework(minuend + " - " + subtractor);
@@ -26,7 +37,7 @@ public class MinusLess100GeneratorImpl implements IGenerator {
 	
 	public int generateMinuend() {
 		int val = random.nextInt(MAX_SUM);
-		while (val<=10) {
+		while (val<=30) {
 			val = random.nextInt(MAX_SUM);
 		}
 		return val;
